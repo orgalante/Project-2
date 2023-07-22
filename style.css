@@ -7,6 +7,23 @@
   border-radius: 2px;
 }
 
+.card{
+  border-radius: 0%;
+  background-color: #040549;
+border-color: aliceblue;
+  /* background-image: url("assets/images/cardBG.jpg"); */
+background-size: cover ;
+
+  background-repeat: no-repeat;
+
+  margin-top: 30px;
+}
+
+.card-body h5,p{
+  color: #f3f3f3;
+  /* background-color: black; */
+}
+
 .center-it {
     float: none;
     margin-right: 0;
@@ -15,6 +32,8 @@
 
 .test:checked{
     background-color: aqua;
+    background-size: 100%;
+
 }
 
 
@@ -42,4 +61,18 @@
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  .parallax {
+    /* The image used */
+    background-image: url("assets/images/pageCryptoBG.jpg");
+  
+    /* Set a specific height */
+    min-height: 500px;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }

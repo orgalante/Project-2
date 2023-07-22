@@ -8,17 +8,17 @@ class CoinObj {
             `
     <div class="col-xs-10 col-sm-6 col-md-3 col-lg-2 ">
         <div class="card text-center ">
-            <img src="${this.img}" class="card-img-top w-50 mx-auto d-block" alt="${this.cId}">
+            <img src="${this.img}" class="card-img-top w-50 mt-3 mx-auto d-block" alt="${this.cId}">
             <div class="card-body">
                 <h5 class="card-title">${this.symbol}</h5>
-                <p class="card-text">${this.cId}</p>
+                <p class="card-text mb-1">${this.cId}</p>
                 <div class="form-check form-switch ">
-                    <input class="form-check-input float-none" type="checkbox" 
+                    <input class="form-check-input float-none w-75" type="checkbox" 
                     id="${this.cId}SwitchInput">
                 </div>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                <button class="btn btn-dark mt-2 rounded-circle border-white" type="button" data-bs-toggle="collapse"
                 id="${this.cId}CollapseBtn" data-bs-target="#${this.cId}Collapse" aria-expanded="false" aria-controls="${this.cId}Collapse">
-                   <span> More Info 
+                   <span> More<br>Info 
                    <div id="${this.cId}Loader" class="spin-loader"></div>
                    </span>
                 </button>

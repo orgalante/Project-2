@@ -42,7 +42,7 @@ function initHomeContent() {
             </div>
         </div>
     `;
-    bodyCont.innerHTML = html;
+    //bodyCont.innerHTML = html;
     coinsArr = [];
     coinsInfo = [];
     selectedCoins = [];
@@ -60,13 +60,15 @@ function getAndDisplayAllCoins() {
 }
 // jQuery functions -  npm i --save-dev @types/jquery 
 $(() => {
-    // 
     $("#searchInput").on('keyup', (e) => {
         const filter = $("#searchInput").val().toString();
         displayCoins(filter);
     });
     $("#pills-about-tab").on('click', () => {
-        startAbout();
+        if (this.timeOutId !== 0) {
+            clearTimeout(this.timeOutId);
+            this.timeOutId = 0;
+        }
     });
 });
 function saveCoinsToArr(coins) {
@@ -76,6 +78,7 @@ function saveCoinsToArr(coins) {
     }
 }
 function displayCoins(filter = "") {
+    console.log("displayCoins");
     const filtered = coinsArr.filter((c) => {
         return ((c.cId).indexOf(filter) !== -1 || (c.symbol).indexOf(filter) !== -1);
     });
@@ -83,7 +86,7 @@ function displayCoins(filter = "") {
     container.innerHTML = "";
     for (const coin of filtered) {
         container.appendChild(parseHTML(coin.getCoinCardHtml()));
-        // ---Colapse Event---
+        // ---Collapse Event---
         let coinCollapseBtn = document.getElementById(`${coin.cId}CollapseBtn`);
         coinCollapseBtn.addEventListener("click", function () {
             if (coinCollapseBtn.getAttribute("aria-expanded") === "true")
@@ -154,7 +157,6 @@ function bindCoinInfo(coinId) {
         <p class="card-text">USD: ${coinItem.price.usd}</p>
         <p class="card-text">EUR: ${coinItem.price.eur}</p>
         <p class="card-text">ILS: ${coinItem.price.ils}</p>
-        <br>
         `;
     collapse.innerHTML = html;
 }
@@ -210,13 +212,4 @@ function displaySelectedCoinsInModal(coinToAdd) {
             }
         });
     }
-}
-function startAbout() {
-    let bodyCont = document.getElementById("bodyContentContainer");
-    let html = "";
-    html =
-        `
-        <h2>here will be about page...</h2
-    `;
-    bodyCont.innerHTML = html;
 }

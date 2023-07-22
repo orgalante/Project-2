@@ -20,7 +20,7 @@ $(() => {
         $(".testing").append(`<input type ="text"/>`);
 
     });
-  
+
 });
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -32,7 +32,7 @@ const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_cu
 
 initHomeContent();
 
-function initHomeContent(){
+function initHomeContent() {
     let bodyCont = document.getElementById("bodyContentContainer");
     let html = "";
     html =
@@ -42,7 +42,7 @@ function initHomeContent(){
             </div>
         </div>
     `;
-    bodyCont.innerHTML = html;
+    //bodyCont.innerHTML = html;
     coinsArr = [];
     coinsInfo = [];
     selectedCoins = [];
@@ -62,15 +62,16 @@ async function getAndDisplayAllCoins() {
 // jQuery functions -  npm i --save-dev @types/jquery 
 $(() => {
 
-   // 
-
     $("#searchInput").on('keyup', (e) => {
         const filter = $("#searchInput").val().toString();
         displayCoins(filter);
     });
 
     $("#pills-about-tab").on('click', () => {
-        startAbout();
+        if (this.timeOutId !== 0) {
+            clearTimeout(this.timeOutId);
+            this.timeOutId = 0;
+        }
     });
 
 });
@@ -84,17 +85,17 @@ function saveCoinsToArr(coins: any) {
 }
 
 function displayCoins(filter = "") {
-
+console.log("displayCoins",)
     const filtered = coinsArr.filter((c) => {
         return ((c.cId).indexOf(filter) !== -1 || (c.symbol).indexOf(filter) !== -1);
     });
-    
+
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
 
     for (const coin of filtered) {
         container.appendChild(parseHTML(coin.getCoinCardHtml()));
-        // ---Colapse Event---
+        // ---Collapse Event---
         let coinCollapseBtn = document.getElementById(`${coin.cId}CollapseBtn`);
         coinCollapseBtn.addEventListener("click", function () {
             if (coinCollapseBtn.getAttribute("aria-expanded") === "true")
@@ -109,7 +110,7 @@ function displayCoins(filter = "") {
         });
     }
 
-    console.log("container coins after",container.childElementCount );
+    console.log("container coins after", container.childElementCount);
 }
 
 async function getJson(url: string): Promise<any> {
@@ -171,7 +172,6 @@ function bindCoinInfo(coinId) {
         <p class="card-text">USD: ${coinItem.price.usd}</p>
         <p class="card-text">EUR: ${coinItem.price.eur}</p>
         <p class="card-text">ILS: ${coinItem.price.ils}</p>
-        <br>
         `;
     collapse.innerHTML = html;
 }
@@ -182,7 +182,7 @@ function getPrice(str, curr) {
 }
 
 function addCoinToSelected(coin: CoinObj) {
-console.log(selectedCoins)
+    console.log(selectedCoins)
     if (selectedCoins.length === 5) {
         // remove selection from 6st coin
         let coinSwitchInput = <HTMLInputElement>document.getElementById(`${coin.cId}SwitchInput`);
@@ -240,14 +240,6 @@ function displaySelectedCoinsInModal(coinToAdd: CoinObj) {
 
 }
 
-function startAbout(){
-    let bodyCont = document.getElementById("bodyContentContainer");
-    let html = "";
-    html =
-        `
-        <h2>here will be about page...</h2
-    `;
-    bodyCont.innerHTML = html;
-}
+
 
 

@@ -7,35 +7,22 @@ $(() => {
     });
     $("#pills-home-tab").on('click', () => {
         clearInterval(intervalId);
-        console.log("stopped interval num: ", intervalId);
-        initHomeContent();
     });
 });
 
 function startLiveReport() {
-    let bodyCont = document.getElementById("bodyContentContainer");
-    let html = "";
+    $("#chartContainer").html(""); // init
+    $("#chartMsgContainer").hide();
 
     if (selectedCoins.length == 0) {
-        html =
-            `
-        <h2>No Coins were selected...</h2>
-        <h3>Please select Coins for Live Report at Home Page</h3>
-        `;
-        bodyCont.innerHTML = html;
-        setTimeout(() => {
-            $('#pills-home-tab').addClass("active");
-            $('#pills-Live-Report-tab').removeClass("active");
-            initHomeContent();
+        $("#chartMsgContainer").show();
+        timeOutId = setTimeout(() => {
+            var homeTabEl = document.querySelector('#pills-home-tab')
+            var homeTab = new bootstrap.Tab(homeTabEl);
+            homeTab.show();
         }, 10000);
     }
-    else {
-        html = `<div id="chartContainer" style=" height:80%;width:80%;"></div>`;
-        bodyCont.innerHTML = html;
-        getSelectedCoinsApi();
-    }
-
-
+    else getSelectedCoinsApi();
 }
 
 var dataPointsArr = [];
@@ -69,7 +56,7 @@ var options = {
         labelFontColor: "#4F81BC",
         tickColor: "#4F81BC",
         labelFormatter: function (e) {
-            return "$"+ CanvasJS.formatNumber(e.value, "#,##0.#");
+            return "$" + CanvasJS.formatNumber(e.value, "#,##0.#");
         }
     },
     toolTip: {
@@ -97,8 +84,6 @@ function toggleDataSeries(e) {
 function drawChart() {
     // var chart = new CanvasJS.Chart("chartContainer", options);
     chart.render();
-
-
 }
 
 var updateInterval = 2000; // every 2 seconds
@@ -107,6 +92,7 @@ var chart;
 
 var time = new Date();
 var intervalId = 0;
+var timeOutId = 0;
 
 async function getSelectedCoinsApi() {
 
@@ -127,17 +113,16 @@ async function getSelectedCoinsApi() {
             dataPoints: []
         }
         dataPointsArr.push(cell);
-
-
     }
     options["data"] = dataPointsArr;
-    coinsStr = coinsStr.slice(0,-1);
-    options["title"]["text"] = coinsStr+" To USD";
+    coinsStr = coinsStr.slice(0, -1);
+    let testStr = coinsStr.replace(",",", ");
+    options["title"]["text"] = coinsStr.replace(",",", ").toUpperCase() + " To USD";
     chart = new CanvasJS.Chart("chartContainer", options);
-    console.log("dataPointsArr", dataPointsArr);
 
-    console.log("coinsStr", coinsStr);
-    
+    //console.log("dataPointsArr", dataPointsArr);
+    //console.log("coinsStr", coinsStr);
+
     refreshData();
     intervalId = setInterval(refreshData, 2000);
 }
