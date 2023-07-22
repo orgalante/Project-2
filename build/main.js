@@ -65,6 +65,9 @@ $(() => {
         const filter = $("#searchInput").val().toString();
         displayCoins(filter);
     });
+    $("#pills-about-tab").on('click', () => {
+        startAbout();
+    });
 });
 function saveCoinsToArr(coins) {
     for (const coin of coins) {
@@ -72,14 +75,12 @@ function saveCoinsToArr(coins) {
         coinsArr.push(cObj);
     }
 }
-// 	L - 6, M - 4 ,SM - 2, Mobile -1 
 function displayCoins(filter = "") {
     const filtered = coinsArr.filter((c) => {
         return ((c.cId).indexOf(filter) !== -1 || (c.symbol).indexOf(filter) !== -1);
     });
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
-    console.log("container coins before", container.childElementCount);
     for (const coin of filtered) {
         container.appendChild(parseHTML(coin.getCoinCardHtml()));
         // ---Colapse Event---
@@ -209,4 +210,13 @@ function displaySelectedCoinsInModal(coinToAdd) {
             }
         });
     }
+}
+function startAbout() {
+    let bodyCont = document.getElementById("bodyContentContainer");
+    let html = "";
+    html =
+        `
+        <h2>here will be about page...</h2
+    `;
+    bodyCont.innerHTML = html;
 }

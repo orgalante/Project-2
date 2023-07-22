@@ -8,7 +8,6 @@ $(() => {
     $("#pills-home-tab").on('click', () => {
         clearInterval(intervalId);
         console.log("stopped interval num: ", intervalId);
-
         initHomeContent();
     });
 });
@@ -132,6 +131,7 @@ async function getSelectedCoinsApi() {
 
     }
     options["data"] = dataPointsArr;
+    coinsStr = coinsStr.slice(0,-1);
     options["title"]["text"] = coinsStr+" To USD";
     chart = new CanvasJS.Chart("chartContainer", options);
     console.log("dataPointsArr", dataPointsArr);
