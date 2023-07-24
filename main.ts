@@ -2,7 +2,7 @@
 //import CoinObj from "build/coin.js";
 // <reference path="jquery-3.7.0.js" />
 // some class exr. JQUERY ~~~~~~~~~~
-
+console.log()
 $(() => {
     $("button").click(() => {
         // $(".testing").hide(1000).show(1000);
@@ -49,13 +49,29 @@ function initHomeContent() {
     getAndDisplayAllCoins();
 }
 
+class CoinsData {
+    coinsData: any;
+    updatedTo: Date;
+}
 async function getAndDisplayAllCoins() {
+    let coinsData: CoinsData;
+    // check if user has coin data in storage
+    coinsData = JSON.parse(localStorage.getItem("coinsDataAll"));
 
-    //const coins = await getJson(currenciesUrl_TEST);
-    //let str = JSON.stringify(coins);
-    //localStorage.setItem("coinsDataAll",str);
-    const coins: any = JSON.parse(localStorage.getItem("coinsDataAll"));
-    saveCoinsToArr(coins);
+    // check if more than 1 minute gone from last time or no localStorage:
+    if (coinsData === null || coinsData === undefined ||
+        Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
+        // WE NEED NEW CALL
+        const coins = await getJson(currenciesUrl_TEST);
+        let coinsData = new CoinsData();
+        coinsData.coinsData = coins;
+        coinsData.updatedTo = new Date();
+        let str = JSON.stringify(coinsData);
+        localStorage.setItem("coinsDataAll", str);
+        coinsData = JSON.parse(localStorage.getItem("coinsDataAll"));
+    }
+
+    saveCoinsToArr(coinsData.coinsData);
     displayCoins("");
 }
 
@@ -85,7 +101,7 @@ function saveCoinsToArr(coins: any) {
 }
 
 function displayCoins(filter = "") {
-console.log("displayCoins",)
+    console.log("displayCoins",)
     const filtered = coinsArr.filter((c) => {
         return ((c.cId).indexOf(filter) !== -1 || (c.symbol).indexOf(filter) !== -1);
     });
@@ -168,7 +184,7 @@ function bindCoinInfo(coinId) {
 
     const html =
         `
-        <br>
+        <br> 
         <p class="card-text">USD: ${coinItem.price.usd}</p>
         <p class="card-text">EUR: ${coinItem.price.eur}</p>
         <p class="card-text">ILS: ${coinItem.price.ils}</p>
