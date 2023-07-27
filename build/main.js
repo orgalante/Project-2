@@ -34,16 +34,6 @@ const currenciesUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currenc
 const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
 initHomeContent();
 function initHomeContent() {
-    let bodyCont = document.getElementById("bodyContentContainer");
-    let html = "";
-    html =
-        `
-        <div class="container">
-            <div class="row justify-content-center" id="allCoinsDiv">
-            </div>
-        </div>
-    `;
-    //bodyCont.innerHTML = html;
     coinsArr = [];
     coinsInfo = [];
     selectedCoins = [];
@@ -75,7 +65,7 @@ function getAndDisplayAllCoins() {
 // jQuery functions -  npm i --save-dev @types/jquery 
 $(() => {
     $("#searchInput").on('keyup', (e) => {
-        const filter = $("#searchInput").val().toString();
+        const filter = $("#searchInput").val().toString().toLowerCase();
         displayCoins(filter);
     });
     $("#pills-about-tab").on('click', () => {
@@ -98,6 +88,16 @@ function displayCoins(filter = "") {
     });
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
+    if (filtered.length === 0) {
+        container.innerHTML =
+            `
+        <div class=" bg-transparent justify-content-center " >
+        <br><br>
+            <p class="text-center fs-2 ">
+                Oops, No Coins by that search were found...</p>
+        </div>
+        `;
+    }
     for (const coin of filtered) {
         container.appendChild(parseHTML(coin.getCoinCardHtml()));
         // ---Collapse Event---
@@ -116,7 +116,6 @@ function displayCoins(filter = "") {
                 removeCoinFromSelected(coin); // remove from arr
         });
     }
-    console.log("container coins after", container.childElementCount);
 }
 function getJson(url) {
     return __awaiter(this, void 0, void 0, function* () {

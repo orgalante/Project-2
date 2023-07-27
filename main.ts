@@ -33,16 +33,6 @@ const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_cu
 initHomeContent();
 
 function initHomeContent() {
-    let bodyCont = document.getElementById("bodyContentContainer");
-    let html = "";
-    html =
-        `
-        <div class="container">
-            <div class="row justify-content-center" id="allCoinsDiv">
-            </div>
-        </div>
-    `;
-    //bodyCont.innerHTML = html;
     coinsArr = [];
     coinsInfo = [];
     selectedCoins = [];
@@ -79,7 +69,7 @@ async function getAndDisplayAllCoins() {
 $(() => {
 
     $("#searchInput").on('keyup', (e) => {
-        const filter = $("#searchInput").val().toString();
+        const filter:string = $("#searchInput").val().toString().toLowerCase();
         displayCoins(filter);
     });
 
@@ -89,7 +79,6 @@ $(() => {
             this.timeOutId = 0;
         }
     });
-
 });
 
 function saveCoinsToArr(coins: any) {
@@ -109,6 +98,17 @@ function displayCoins(filter = "") {
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
 
+    if(filtered.length===0){
+        container.innerHTML = 
+        `
+        <div class=" bg-transparent justify-content-center " >
+        <br><br>
+            <p class="text-center fs-2 ">
+                Oops, No Coins by that search were found...</p>
+        </div>
+        `;
+    }
+
     for (const coin of filtered) {
         container.appendChild(parseHTML(coin.getCoinCardHtml()));
         // ---Collapse Event---
@@ -126,7 +126,6 @@ function displayCoins(filter = "") {
         });
     }
 
-    console.log("container coins after", container.childElementCount);
 }
 
 async function getJson(url: string): Promise<any> {
