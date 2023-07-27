@@ -19,6 +19,17 @@ background-size: cover ;
   margin-top: 30px;
 }
 
+img {
+  -webkit-filter: drop-shadow(2px 1px 0 white)
+                  drop-shadow(-1px -1px 0 white);
+  filter: drop-shadow(2px 1px 0 white) 
+          drop-shadow(-1px -1px 0 white);
+}
+
+.text-size-adjust{
+  /* font-size: clamp(1rem, 2vw + 0.75rem, 1.5rem); */
+}
+
 .card-body h5,p{
   color: #f3f3f3;
   /* background-color: black; */
