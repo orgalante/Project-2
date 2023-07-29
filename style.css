@@ -1,4 +1,14 @@
 
+body{
+  font-family: 'Righteous', cursive;
+}
+
+.hand-font{
+  font-family: 'Righteous', cursive;
+font-family: 'Instrument Sans', sans-serif;
+
+}
+
 .testing{
   width: 100px;
   height:100px;
@@ -19,16 +29,18 @@ background-size: cover ;
   margin-top: 30px;
 }
 
-img {
+.img-white {
   -webkit-filter: drop-shadow(2px 1px 0 white)
                   drop-shadow(-1px -1px 0 white);
   filter: drop-shadow(2px 1px 0 white) 
           drop-shadow(-1px -1px 0 white);
 }
 
-.text-size-adjust{
-  /* font-size: clamp(1rem, 2vw + 0.75rem, 1.5rem); */
+.img-logo{
+  width: 30px;
 }
+
+
 
 .card-body h5,p{
   color: #f3f3f3;
@@ -45,6 +57,18 @@ img {
     background-color: aqua;
     background-size: 100%;
 
+}
+
+.logo-div{
+  background-image: url(assets/images/creepyCryptoLogo.png);
+
+    /* Set a specific height */
+    /* min-height: 500px;   */
+    /* Create the parallax scrolling effect */
+    /* background-attachment: fixed; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;  
 }
 
 

@@ -20,6 +20,13 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 
+    <!-- google fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Handlee&family=Instrument+Sans:wght@500&family=Righteous&display=swap"
+        rel="stylesheet">
+
     <!-- chart scripts  -->
 
     <script defer type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -37,14 +44,18 @@
 </head>
 
 <body class="parallax">
-
     <!-- nav-bar  -->
     <nav class="navbar navbar-dark bg-dark ">
         <div class="container-fluid">
-            <a class="navbar-brand">Creepy Crypto</a>
+            <a class="navbar-brand bg-transparent">
+                <div class="logo-div text-center justify-content-center">
+                    Creepy<br>Crypto
+                </div>
+            </a>
+
             <ul class="nav nav-pills" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                    <button class=" nav-link active" id="pills-home-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
                         aria-selected="true">Home</button>
                 </li>
@@ -66,8 +77,6 @@
         </div>
     </nav>
 
-
-
     <div class="tab-content" id="pills-tabContent">
         <!-- Home  -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -81,34 +90,24 @@
         <div class="tab-pane fade" id="pills-Live-Report" role="tabpanel" aria-labelledby="pills-profile-tab">
             <div id="chartContainer" style=" height:80%;width:100%;"></div>
             <div id="chartMsgContainer">
-                <div class="alert alert-success" role="alert">
-                    <h2>No Coins were selected...</h2>
+                <div class="alert alert-danger" role="alert">
+                    <h2 class = "alert-heading">😟 No Coins were selected...</h2>
                     <h3>Please select Coins for Live Report at Home Page</h3>
-                    <h4 class="alert-heading">Well done!</h4>
-                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
-                    </p>
+                    <p class = "alert-heading">Moving to Home page in <span id="secondsSpan"></span> seconds...</p>
                 </div>
             </div>
         </div>
         <!-- About  -->
         <div class="tab-pane fade" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab">
-            <div class="text-wrap bg-transparent justify-content-center text-wrap text-center">
+            <div class="hand-font text-wrap bg-transparent justify-content-center text-wrap text-center">
                 <div class="d-inline"></div>
                 <br>
                 <p class="fs-2 text-center">Hi, my name is Or Galante</p>
                 <p class=" text-center ">I am a software Developer on my way to become a Full-Stack Web
                     Developer.<br>Enthusiastic about computer games (play and develop).<br>Fast-learner, funny and
                     great.</p>
-                <img src="assets/images/profilePicOrg.png" width="" height="" class="mb-5 mt-0 w-25 " alt="...">
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Well done!</h4>
-                    <p>Aww yeah, you successfully read this important alert message. This example text is going to run a
-                        bit
-                        longer so that you can see how spacing within an alert works with this kind of content.</p>
-                    <hr>
-                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
-                    </p>
-                </div>
+                <img src="assets/images/profilePicOrg.png" width="" height="" class="mb-5 mt-0 w-25 img-white"
+                    alt="...">
             </div>
         </div>
 
