@@ -71,6 +71,10 @@ background-size: cover ;
     background-size: cover;  
 }
 
+hr{
+  color: white;
+}
+
 
 .spin-loader {
     position: absolute;

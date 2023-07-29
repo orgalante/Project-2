@@ -7,7 +7,7 @@ class CoinObj {
     getCoinCardHtml() {
         let html = `
     <div class="col-6 col-sm-6 col-md-3 col-lg-2 ">
-        <div class="card text-center ">
+        <div class="card text-center rounded-3">
             <img src="${this.img}" class="card-img-top w-50 mt-3 mx-auto d-block" alt="${this.cId}">
             <div class="card-body">
                 <h5 class="card-title">${this.symbol}</h5>
