@@ -1,5 +1,5 @@
 class CoinObj {
-    ghj
+    
     constructor(public cId: string, public img: string, public symbol: string) {
     }
 

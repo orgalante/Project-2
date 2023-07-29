@@ -31,7 +31,7 @@ let coinsInfo = [];
 let coinsArr = [];
 var selectedCoins = [];
 const currenciesUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1";
-const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
+// const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
 initHomeContent();
 function initHomeContent() {
     coinsArr = [];
@@ -50,7 +50,7 @@ function getAndDisplayAllCoins() {
         if (coinsData === null || coinsData === undefined ||
             Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
             // WE NEED NEW CALL
-            const coins = yield getJson(currenciesUrl_TEST);
+            const coins = yield getJson(currenciesUrl);
             let coinsData = new CoinsData();
             coinsData.coinsData = coins;
             coinsData.updatedTo = new Date();
