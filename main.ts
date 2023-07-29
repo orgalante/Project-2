@@ -24,11 +24,11 @@ $(() => {
 });
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+const coinsDataKey = "coinsDataAll";
 let coinsInfo = [];
 let coinsArr: CoinObj[] = [];
 var selectedCoins: CoinObj[] = [];
 const currenciesUrl = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1";
-// const currenciesUrl_TEST = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1";
 
 initHomeContent();
 
@@ -40,36 +40,62 @@ function initHomeContent() {
 }
 
 class CoinsData {
-    coinsData: any;
-    updatedTo: Date;
+    constructor(public coinsData: any, public updatedTo: Date) { }
 }
+
+
 async function getAndDisplayAllCoins() {
     let coinsData: CoinsData;
-    // check if user has coin data in storage
-    coinsData = JSON.parse(localStorage.getItem("coinsDataAll"));
+    const container = document.getElementById("allCoinsDiv");
+    container.innerHTML = "";
+    
+    try {
+         // check if user has coin data in storage
+    coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
+        // check if more than 1 minute gone from last time or no localStorage:
+        if (coinsData === null || coinsData === undefined ||
+            Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
+            // WE NEED NEW CALL
 
-    // check if more than 1 minute gone from last time or no localStorage:
-    if (coinsData === null || coinsData === undefined ||
-        Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
-        // WE NEED NEW CALL
-        const coins = await getJson(currenciesUrl);
-        let coinsData = new CoinsData();
-        coinsData.coinsData = coins;
-        coinsData.updatedTo = new Date();
-        let str = JSON.stringify(coinsData);
-        localStorage.setItem("coinsDataAll", str);
-        coinsData = JSON.parse(localStorage.getItem("coinsDataAll"));
+            const coins = await getJson(currenciesUrl);
+            coinsData = new CoinsData(coins,new Date());
+         
+            let str = JSON.stringify(coinsData);
+            localStorage.setItem(coinsDataKey, str);
+
+            coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
+        }
+
+        saveCoinsToArr(coinsData.coinsData);
+        displayCoins("");
+
+    } catch (e) {
+        console.log("e", e);
+        localStorage.removeItem(coinsDataKey);
+        let msgErrStr = "Oops 😕, an error has occurred.<br>Please try again or come back later.";
+        container.innerHTML = 
+        `
+        <div class=" bg-transparent justify-content-center " >
+        <br><br>
+            <p class="text-center fs-2 ">
+                ${msgErrStr}</p>
+        </div>
+        `;
     }
 
-    saveCoinsToArr(coinsData.coinsData);
-    displayCoins("");
+}
+
+
+function getCoinsDataFromLocalStorage(dataKey: string) {
+    const dataStr = localStorage.getItem(dataKey);
+    return JSON.parse(dataStr);
 }
 
 // jQuery functions -  npm i --save-dev @types/jquery 
 $(() => {
 
     $("#searchInput").on('keyup', (e) => {
-        const filter:string = $("#searchInput").val().toString().toLowerCase();
+        const filter: string = $("#searchInput").val().toString().toLowerCase();
         displayCoins(filter);
     });
 
@@ -98,9 +124,9 @@ function displayCoins(filter = "") {
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
 
-    if(filtered.length===0){
-        container.innerHTML = 
-        `
+    if (filtered.length === 0) {
+        container.innerHTML =
+            `
         <div class=" bg-transparent justify-content-center " >
         <br><br>
             <p class="text-center fs-2 ">
