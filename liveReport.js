@@ -95,36 +95,39 @@ var intervalId = 0;
 var timeOutId = 0;
 
 async function getSelectedCoinsApi() {
+    try {
+        coinsStr = "";
+        dataPointsArr = []; // init
+        for (const selectedCoin in selectedCoins) {
+            let symbolStr = selectedCoins[selectedCoin]["symbol"];
+            coinsStr += symbolStr + ",";
 
-    coinsStr = "";
-    dataPointsArr = []; // init
-    for (const selectedCoin in selectedCoins) {
-        let symbolStr = selectedCoins[selectedCoin]["symbol"];
-        coinsStr += symbolStr + ",";
-
-        // initDataPointsArr
-        let cell = {
-            type: "spline",
-            xValueType: "dateTime",
-            xValueFormatString: "HH:mm:ss",
-            name: symbolStr,
-            showInLegend: true,
-            yValueFormatString: "$#,##0.#",
-            dataPoints: []
+            // initDataPointsArr
+            let cell = {
+                type: "spline",
+                xValueType: "dateTime",
+                xValueFormatString: "HH:mm:ss",
+                name: symbolStr,
+                showInLegend: true,
+                yValueFormatString: "$#,##0.#",
+                dataPoints: []
+            }
+            dataPointsArr.push(cell);
         }
-        dataPointsArr.push(cell);
+        options["data"] = dataPointsArr;
+        coinsStr = coinsStr.slice(0, -1);
+        let testStr = coinsStr.replace(",", ", ");
+        options["title"]["text"] = coinsStr.replace(",", ", ").toUpperCase() + " To USD";
+        chart = new CanvasJS.Chart("chartContainer", options);
+
+        refreshData();
+        intervalId = setInterval(refreshData, 2000);
     }
-    options["data"] = dataPointsArr;
-    coinsStr = coinsStr.slice(0, -1);
-    let testStr = coinsStr.replace(",",", ");
-    options["title"]["text"] = coinsStr.replace(",",", ").toUpperCase() + " To USD";
-    chart = new CanvasJS.Chart("chartContainer", options);
+    catch (e) {
+        console.log(e);
+    }
 
-    //console.log("dataPointsArr", dataPointsArr);
-    //console.log("coinsStr", coinsStr);
 
-    refreshData();
-    intervalId = setInterval(refreshData, 2000);
 }
 
 

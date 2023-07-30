@@ -105,6 +105,7 @@ $(() => {
     });
 
     $("#pills-about-tab").on('click', () => {
+        clearInterval(this.intervalId);
         if (this.timeOutId !== 0) {
             clearTimeout(this.timeOutId);
             this.timeOutId = 0;
@@ -112,6 +113,7 @@ $(() => {
     });
 
     $("#logoBtn").on('click', () => {
+        clearInterval(this.intervalId);
         var homeTabEl = document.querySelector('#pills-home-tab')
         var homeTab = new bootstrap.Tab(homeTabEl);
         homeTab.show();
@@ -172,43 +174,49 @@ async function getJson(url: string): Promise<any> {
 }
 
 async function getAndBindCoinInfo(coinId: string) {
-    //check if info exist in storage, and if updated 
-    let coinIndx = coinsInfo.findIndex(obj => obj.coinId === coinId);
-    let coinItem = coinsInfo[coinIndx];
-    // if need an info fetch
-    if (coinItem === undefined || coinItem === null ||
-        Math.floor(new Date().getTime() / 1000) - Math.floor(coinItem.date.getTime() / 1000) > 120) {
-        const loaderId = coinId + "Loader";
-        let loaderSpin = document.getElementById(loaderId);
-        loaderSpin.style.display = "inline-block";
-        //document.getElementById(loaderId).style.display = "none";
-        console.log("fetch", coinId, new Date())
-        const url = "https://api.coingecko.com/api/v3/coins/" + coinId;
-        const coinInfo = await getJson(url);
+    try {
 
-        if (coinItem !== undefined && coinItem !== null) {
-            // console.log(Math.floor(new Date().getTime() / 1000) - Math.floor(coinItem.date.getTime() / 1000))
-            coinsInfo.splice(coinIndx, 1);
+        //check if info exist in storage, and if updated 
+        let coinIndx = coinsInfo.findIndex(obj => obj.coinId === coinId);
+        let coinItem = coinsInfo[coinIndx];
+        // if need an info fetch
+        if (coinItem === undefined || coinItem === null ||
+            Math.floor(new Date().getTime() / 1000) - Math.floor(coinItem.date.getTime() / 1000) > 120) {
+            const loaderId = coinId + "Loader";
+            let loaderSpin = document.getElementById(loaderId);
+            loaderSpin.style.display = "inline-block";
+            //document.getElementById(loaderId).style.display = "none";
+            console.log("fetch", coinId, new Date())
+            const url = "https://api.coingecko.com/api/v3/coins/" + coinId;
+            const coinInfo = await getJson(url);
+
+            if (coinItem !== undefined && coinItem !== null) {
+                // console.log(Math.floor(new Date().getTime() / 1000) - Math.floor(coinItem.date.getTime() / 1000))
+                coinsInfo.splice(coinIndx, 1);
+            }
+
+            const coinInfoObj = {
+                coinId: coinInfo.id,
+                price: {
+                    usd: getPrice(coinInfo.market_data.current_price.usd, 'USD'),
+                    eur: getPrice(coinInfo.market_data.current_price.eur, 'EUR'),
+                    ils: getPrice(coinInfo.market_data.current_price.ils, 'ILS')
+                },
+                date: new Date()
+            }
+            coinsInfo.push(coinInfoObj);
+            bindCoinInfo(coinId);
+
+            loaderSpin.style.display = "none";
+        }
+        else {
+            bindCoinInfo(coinId);
         }
 
-        const coinInfoObj = {
-            coinId: coinInfo.id,
-            price: {
-                usd: getPrice(coinInfo.market_data.current_price.usd, 'USD'),
-                eur: getPrice(coinInfo.market_data.current_price.eur, 'EUR'),
-                ils: getPrice(coinInfo.market_data.current_price.ils, 'ILS')
-            },
-            date: new Date()
-        }
-        coinsInfo.push(coinInfoObj);
-        bindCoinInfo(coinId);
-
-        loaderSpin.style.display = "none";
+    } catch (e) {
+        console.log(e);
     }
 
-    else {
-        bindCoinInfo(coinId);
-    }
 
 
 }
