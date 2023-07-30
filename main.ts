@@ -48,20 +48,20 @@ async function getAndDisplayAllCoins() {
     let coinsData: CoinsData;
     const container = document.getElementById("allCoinsDiv");
     container.innerHTML = "";
-    
+
     try {
-         // check if user has coin data in storage
-         $("#dispLoadLoader").css({ display: "inline-block" });
-    coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
+        // check if user has coin data in storage
+        $("#dispLoadLoader").css({ display: "inline-block" });
+        coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
         // check if more than 1 minute gone from last time or no localStorage:
         if (coinsData === null || coinsData === undefined ||
             Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
             // WE NEED NEW CALL
-            
+
 
             const coins = await getJson(currenciesUrl);
-            coinsData = new CoinsData(coins,new Date());
-         
+            coinsData = new CoinsData(coins, new Date());
+
             let str = JSON.stringify(coinsData);
             localStorage.setItem(coinsDataKey, str);
 
@@ -78,8 +78,8 @@ async function getAndDisplayAllCoins() {
         $("#dispLoadLoader").css({ display: "none" });
         localStorage.removeItem(coinsDataKey);
         let msgErrStr = "Oops 😕, an error has occurred.<br>Please try again or come back later.";
-        container.innerHTML = 
-        `
+        container.innerHTML =
+            `
         <div class=" bg-transparent justify-content-center " >
         <br><br>
             <p class="text-center fs-2 ">
@@ -109,6 +109,12 @@ $(() => {
             clearTimeout(this.timeOutId);
             this.timeOutId = 0;
         }
+    });
+
+    $("#logoBtn").on('click', () => {
+        var homeTabEl = document.querySelector('#pills-home-tab')
+        var homeTab = new bootstrap.Tab(homeTabEl);
+        homeTab.show();
     });
 });
 

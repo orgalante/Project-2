@@ -100,6 +100,11 @@ $(() => {
             this.timeOutId = 0;
         }
     });
+    $("#logoBtn").on('click', () => {
+        var homeTabEl = document.querySelector('#pills-home-tab');
+        var homeTab = new bootstrap.Tab(homeTabEl);
+        homeTab.show();
+    });
 });
 function saveCoinsToArr(coins) {
     for (const coin of coins) {
