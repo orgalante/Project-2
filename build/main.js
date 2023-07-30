@@ -52,6 +52,7 @@ function getAndDisplayAllCoins() {
         container.innerHTML = "";
         try {
             // check if user has coin data in storage
+            $("#dispLoadLoader").css({ display: "inline-block" });
             coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
             // check if more than 1 minute gone from last time or no localStorage:
             if (coinsData === null || coinsData === undefined ||
@@ -64,10 +65,12 @@ function getAndDisplayAllCoins() {
                 coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
             }
             saveCoinsToArr(coinsData.coinsData);
+            $("#dispLoadLoader").css({ display: "none" });
             displayCoins("");
         }
         catch (e) {
             console.log("e", e);
+            $("#dispLoadLoader").css({ display: "none" });
             localStorage.removeItem(coinsDataKey);
             let msgErrStr = "Oops 😕, an error has occurred.<br>Please try again or come back later.";
             container.innerHTML =

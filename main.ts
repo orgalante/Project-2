@@ -51,11 +51,13 @@ async function getAndDisplayAllCoins() {
     
     try {
          // check if user has coin data in storage
+         $("#dispLoadLoader").css({ display: "inline-block" });
     coinsData = getCoinsDataFromLocalStorage(coinsDataKey);
         // check if more than 1 minute gone from last time or no localStorage:
         if (coinsData === null || coinsData === undefined ||
             Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
             // WE NEED NEW CALL
+            
 
             const coins = await getJson(currenciesUrl);
             coinsData = new CoinsData(coins,new Date());
@@ -67,10 +69,13 @@ async function getAndDisplayAllCoins() {
         }
 
         saveCoinsToArr(coinsData.coinsData);
+        $("#dispLoadLoader").css({ display: "none" });
+
         displayCoins("");
 
     } catch (e) {
         console.log("e", e);
+        $("#dispLoadLoader").css({ display: "none" });
         localStorage.removeItem(coinsDataKey);
         let msgErrStr = "Oops 😕, an error has occurred.<br>Please try again or come back later.";
         container.innerHTML = 
