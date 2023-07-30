@@ -44,7 +44,7 @@ var options = {
         labelFontColor: "red",
         tickColor: "#1A96B8",
         labelFormatter: function (e) {
-            return CanvasJS.formatDate(e.value, "mm:ss");
+            return CanvasJS.formatDate(e.value, "hh:mm:ss");
         },
         labelAngle: -20,
 
