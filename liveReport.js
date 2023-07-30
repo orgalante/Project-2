@@ -152,7 +152,6 @@ async function getJson(url) {
 }
 
 function updateChart(coins) {
-    console.log(coins);
     for (const coin in coins) {
         const indx = dataPointsArr.findIndex((cell) => {
             const str = cell["name"];

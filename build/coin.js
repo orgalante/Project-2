@@ -1,3 +1,6 @@
+// this class hlds a coin data from the api
+// it can create a coin card html code
+// it can create a modal coin card html code
 class CoinObj {
     constructor(cId, img, symbol) {
         this.cId = cId;
@@ -51,4 +54,3 @@ class CoinObj {
         return html;
     }
 }
-//export default CoinObj // share this object with other scripts
