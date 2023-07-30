@@ -47,6 +47,10 @@ background-size: cover ;
   /* background-color: black; */
 }
 
+.coin-id-p{
+  height: 50px;
+}
+
 .center-it {
     float: none;
     margin-right: 0;
