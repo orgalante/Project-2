@@ -2,10 +2,10 @@ body {
   font-family: 'Righteous', cursive;
 }
 
+/* about me font  */
 .hand-font {
   font-family: 'Righteous', cursive;
   font-family: 'Instrument Sans', sans-serif;
-
 }
 
 .card {
@@ -13,40 +13,23 @@ body {
   background-color: #040549;
   border-color: aliceblue;
   background-size: cover;
-
   background-repeat: no-repeat;
-
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
+/* png border line effect  */
 .img-white {
   -webkit-filter: drop-shadow(2px 1px 0 white) drop-shadow(-1px -1px 0 white);
   filter: drop-shadow(2px 1px 0 white) drop-shadow(-1px -1px 0 white);
 }
 
-.img-logo {
-  width: 30px;
-}
-
 .card-body h5,
 p {
   color: #f3f3f3;
-  /* background-color: black; */
 }
 
 .coin-id-p {
   height: 50px;
-}
-
-.center-it {
-  float: none;
-  margin-right: 0;
-  width: 100%;
-}
-
-.test:checked {
-  background-color: aqua;
-  background-size: 100%;
 }
 
 .logo-div {
@@ -60,8 +43,7 @@ hr {
   color: white;
 }
 
-
-.spin-loader {
+.spin-loader , .spin-loader2 {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -79,11 +61,7 @@ hr {
   width: 200px;
   height: 200px;
   border: 40px solid #f3f3f3;
-  border-radius: 60%;
   border-top: 40px solid #3460db;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-  display: none;
 }
 
 @-webkit-keyframes spin {
@@ -107,13 +85,10 @@ hr {
 }
 
 .parallax {
-  /* The image used */
   background-image: url("assets/images/pageCryptoBG.jpg");
-
-  /* Set a specific height */
   min-height: 500px;
 
-  /* Create the parallax scrolling effect */
+  /* parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
