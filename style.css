@@ -1,27 +1,18 @@
-
-body{
+body {
   font-family: 'Righteous', cursive;
 }
 
-.hand-font{
+.hand-font {
   font-family: 'Righteous', cursive;
-font-family: 'Instrument Sans', sans-serif;
+  font-family: 'Instrument Sans', sans-serif;
 
 }
 
-.testing{
-  width: 100px;
-  height:100px;
-  background-color: orange;
-  border-color: black;
-  border-radius: 2px;
-}
-
-.card{
+.card {
   border-radius: 0%;
   background-color: #040549;
-border-color: aliceblue;
-background-size: cover ;
+  border-color: aliceblue;
+  background-size: cover;
 
   background-repeat: no-repeat;
 
@@ -29,102 +20,102 @@ background-size: cover ;
 }
 
 .img-white {
-  -webkit-filter: drop-shadow(2px 1px 0 white)
-                  drop-shadow(-1px -1px 0 white);
-  filter: drop-shadow(2px 1px 0 white) 
-          drop-shadow(-1px -1px 0 white);
+  -webkit-filter: drop-shadow(2px 1px 0 white) drop-shadow(-1px -1px 0 white);
+  filter: drop-shadow(2px 1px 0 white) drop-shadow(-1px -1px 0 white);
 }
 
-.img-logo{
+.img-logo {
   width: 30px;
 }
 
-.card-body h5,p{
+.card-body h5,
+p {
   color: #f3f3f3;
   /* background-color: black; */
 }
 
-.coin-id-p{
+.coin-id-p {
   height: 50px;
 }
 
 .center-it {
-    float: none;
-    margin-right: 0;
-    width: 100%;
+  float: none;
+  margin-right: 0;
+  width: 100%;
 }
 
-.test:checked{
-    background-color: aqua;
-    background-size: 100%;
-
+.test:checked {
+  background-color: aqua;
+  background-size: 100%;
 }
 
-.logo-div{
+.logo-div {
   background-image: url(assets/images/creepyCryptoLogo.png);
-
-    /* Set a specific height */
-    /* min-height: 500px;   */
-    /* Create the parallax scrolling effect */
-    /* background-attachment: fixed; */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-hr{
+hr {
   color: white;
 }
 
 
 .spin-loader {
-    position: absolute;
-    /* left: 50%; */
-    /* top: 50%; */
-    /* z-index: 1; */
-    width: 20px;
-    height: 20px;
-    margin: 0px 0 0 20px;
-    border: 4px solid #f3f3f3;
-    border-radius: 60% ;
-    border-top: 4px solid #3460db;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-    display: none;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0px 0 0 20px;
+  border: 4px solid #f3f3f3;
+  border-radius: 60%;
+  border-top: 4px solid #3460db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  display: none;
+}
+
+.spin-loader2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 40px solid #f3f3f3;
+  border-radius: 60%;
+  border-top: 40px solid #3460db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  display: none;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
   }
 
-  .spin-loader2 {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border: 40px solid #f3f3f3;
-    border-radius: 60% ;
-    border-top: 40px solid #3460db;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-    display: none;
+  100% {
+    -webkit-transform: rotate(360deg);
   }
-  
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
 
-  .parallax {
-    /* The image used */
-    background-image: url("assets/images/pageCryptoBG.jpg");
-  
-    /* Set a specific height */
-    min-height: 500px;
-  
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  100% {
+    transform: rotate(360deg);
   }
+}
+
+.parallax {
+  /* The image used */
+  background-image: url("assets/images/pageCryptoBG.jpg");
+
+  /* Set a specific height */
+  min-height: 500px;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

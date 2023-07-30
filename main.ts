@@ -1,28 +1,6 @@
 
 //import CoinObj from "build/coin.js";
 // <reference path="jquery-3.7.0.js" />
-// some class exr. JQUERY ~~~~~~~~~~
-console.log()
-$(() => {
-    $("button").click(() => {
-        // $(".testing").hide(1000).show(1000);
-        // $(".testing").animate({fontSize: "50px"},3000);
-
-        // read/write content
-        $(".testing:first-of-type").text('hello');
-        const content = $(".testing:first-of-type").text();
-        // change css
-        $(".testing:first-of-type").css("background-color", "pink");
-        $(".testing:first-of-type").css({ backgroundColor: "pink" });
-        // get css
-
-        const color = $(".testing:first-of-type").css("background-color");
-        $(".testing").append(`<input type ="text"/>`);
-
-    });
-
-});
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const coinsDataKey = "coinsDataAll";
 let coinsInfo = [];
@@ -43,7 +21,6 @@ class CoinsData {
     constructor(public coinsData: any, public updatedTo: Date) { }
 }
 
-
 async function getAndDisplayAllCoins() {
     let coinsData: CoinsData;
     const container = document.getElementById("allCoinsDiv");
@@ -57,7 +34,6 @@ async function getAndDisplayAllCoins() {
         if (coinsData === null || coinsData === undefined ||
             Math.floor(new Date().getTime() / 1000) - Math.floor((new Date(coinsData.updatedTo)).getTime() / 1000) > 60) {
             // WE NEED NEW CALL
-
 
             const coins = await getJson(currenciesUrl);
             coinsData = new CoinsData(coins, new Date());

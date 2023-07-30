@@ -1,3 +1,5 @@
+//import CoinObj from "build/coin.js";
+// <reference path="jquery-3.7.0.js" />
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,26 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-//import CoinObj from "build/coin.js";
-// <reference path="jquery-3.7.0.js" />
-// some class exr. JQUERY ~~~~~~~~~~
-console.log();
-$(() => {
-    $("button").click(() => {
-        // $(".testing").hide(1000).show(1000);
-        // $(".testing").animate({fontSize: "50px"},3000);
-        // read/write content
-        $(".testing:first-of-type").text('hello');
-        const content = $(".testing:first-of-type").text();
-        // change css
-        $(".testing:first-of-type").css("background-color", "pink");
-        $(".testing:first-of-type").css({ backgroundColor: "pink" });
-        // get css
-        const color = $(".testing:first-of-type").css("background-color");
-        $(".testing").append(`<input type ="text"/>`);
-    });
-});
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const coinsDataKey = "coinsDataAll";
 let coinsInfo = [];
 let coinsArr = [];
