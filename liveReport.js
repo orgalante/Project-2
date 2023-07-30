@@ -1,6 +1,7 @@
 
 "use strict";
 
+// click events anonymous functions 
 $(() => {
     $("#pills-Live-Report-tab").on('click', () => {
         startLiveReport();
@@ -10,12 +11,15 @@ $(() => {
     });
 });
 
+// strat build the live report chart and init
 function startLiveReport() {
     $("#chartContainer").html(""); // init
     $("#chartMsgContainer").hide();
 
+    // no coins selected msg
     if (selectedCoins.length == 0) {
         $("#chartMsgContainer").show();
+        // move the user to home page in 10 sec
         timeOutId = setTimeout(() => {
             var homeTabEl = document.querySelector('#pills-home-tab')
             var homeTab = new bootstrap.Tab(homeTabEl);
@@ -32,7 +36,7 @@ var options = {
     animationEnabled: true,
     animationDuration: 2000,
     title: {
-        text: "dynamic Header here**************"
+        text: ""
     },
     subtitles: [{
         text: "Click Legend to Hide or Unhide a Coin"
@@ -81,8 +85,8 @@ function toggleDataSeries(e) {
     e.chart.render();
 }
 
+// sync chart with updated data
 function drawChart() {
-    // var chart = new CanvasJS.Chart("chartContainer", options);
     chart.render();
 }
 
@@ -127,11 +131,9 @@ async function getSelectedCoinsApi() {
         console.log(e);
     }
 
-
 }
 
-
-
+// fetch new coins data and update chart
 async function refreshData() {
     const coins = await newCoinsCall(coinsStr);
     updateChart(coins);
@@ -141,7 +143,6 @@ async function newCoinsCall(coinsStr) {
     let selectedCoinsUrl = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coinsStr}&tsyms=USD`;
     const coins = await getJson(selectedCoinsUrl);
     return coins;
-
 }
 
 async function getJson(url) {
@@ -153,7 +154,6 @@ async function getJson(url) {
 function updateChart(coins) {
     console.log(coins);
     for (const coin in coins) {
-        console.log("coin", coin, coins[coin]);
         const indx = dataPointsArr.findIndex((cell) => {
             const str = cell["name"];
             return str.toUpperCase() == coin.toUpperCase()
@@ -162,11 +162,9 @@ function updateChart(coins) {
         const dataPoint = { x: (new Date()).getTime(), y: usdVal };
         // pushing the new values
         dataPointsArr[indx]["dataPoints"].push(dataPoint);
-        console.log(dataPointsArr[indx]["dataPoints"]);
 
     }
     drawChart();
-
 }
 
 
