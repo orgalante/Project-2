@@ -81,6 +81,7 @@ function getCoinsDataFromLocalStorage(dataKey) {
 $(() => {
     $("#searchInput").on('keyup', (e) => {
         const filter = $("#searchInput").val().toString().toLowerCase();
+        selectedCoins = [];
         displayCoins(filter);
     });
     $("#pills-about-tab").on('click', () => {

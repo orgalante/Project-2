@@ -76,6 +76,7 @@ function getCoinsDataFromLocalStorage(dataKey: string) {
 $(() => {
     $("#searchInput").on('keyup', (e) => {
         const filter: string = $("#searchInput").val().toString().toLowerCase();
+        selectedCoins = [];
         displayCoins(filter);
     });
 
@@ -172,7 +173,7 @@ async function getAndBindCoinInfo(coinId: string) {
 
             // remove old coin extra info
             if (coinItem !== undefined && coinItem !== null) {
-               coinsInfo.splice(coinIndx, 1);
+                coinsInfo.splice(coinIndx, 1);
             }
 
             const coinInfoObj = {
@@ -188,7 +189,7 @@ async function getAndBindCoinInfo(coinId: string) {
             coinsInfo.push(coinInfoObj);
             bindCoinInfo(coinId);
 
-             // small loading spinner stop
+            // small loading spinner stop
             $(`#${loaderId}`).css({ display: "none" });
         }
         else {
